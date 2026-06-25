@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Horizon Bank - Financial Assessment Dashboard</title>
+    <!-- Google Fonts: Inter and Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- App Container -->
+    <div class="app-container">
+        
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-logo">
+                <span class="logo-text">APEX <span class="text-light">HORIZON BANK</span></span>
+            </div>
+            <nav class="header-nav">
+                <a href="#" class="nav-item active">Assessments</a>
+            </nav>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="main-content">
+            
+            <!-- Assessment Form Screen -->
+            <section id="form-screen" class="screen active">
+                <div class="screen-grid">
+                    
+                    <!-- Left: Promo & Description -->
+                    <div class="promo-panel">
+                        <div class="promo-header">
+                            <span class="category-tag text-red">XGBoost Intelligence</span>
+                            <h1 class="display-title">Discover Your Premium Financial Opportunities</h1>
+                            <p class="display-desc">
+                                Welcome to the Apex Horizon Portfolio Evaluator. By analyzing your professional and financial demographics using our trained machine learning models, we instantly estimate your annual earnings category and unlock access to customized loan, credit, and investment instruments.
+                            </p>
+                        </div>
+                        
+                        <div class="promo-features">
+                            <div class="promo-feature-item">
+                                <div class="feature-text">
+                                    <h3>Secure Data Processing</h3>
+                                    <p>Your inputs are processed locally and are never stored or shared.</p>
+                                </div>
+                            </div>
+                            <div class="promo-feature-item">
+                                <div class="feature-text">
+                                    <h3>Advanced Scoring</h3>
+                                    <p>Uses real-time binary decision trees to evaluate income indicators.</p>
+                                </div>
+                            </div>
+                            <div class="promo-feature-item">
+                                <div class="feature-text">
+                                    <h3>Tailored Offerings</h3>
+                                    <p>Get immediate pre-approval thresholds and bespoke wealth advice.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mini status card -->
+                        <div class="status-card">
+                            <div class="status-indicator"></div>
+                            <div class="status-content">
+                                <p class="status-label">Model Status</p>
+                                <p class="status-value">XGBoost Classifier Active</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Form panel -->
+                    <div class="form-panel">
+                        <div class="panel-header">
+                            <h2>Profile Evaluation Form</h2>
+                            <p>Please enter your details below. Fields are pre-filled with baseline averages for convenience.</p>
+                        </div>
+
+                        <form id="evaluation-form" class="evaluation-form">
+                            <!-- Section: Personal Info -->
+                            <div class="form-section">
+                                <h3 class="section-title">Demographics</h3>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="age">Age</label>
+                                        <input type="number" id="age" name="age" min="17" max="90" value="38" required>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="sex">Gender</label>
+                                        <select id="sex" name="sex" required>
+                                            <!-- Dynamically populated -->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="race">Race</label>
+                                        <select id="race" name="race" required>
+                                            <!-- Dynamically populated -->
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="native_country">Native Country</label>
+                                        <select id="native_country" name="native_country" required>
+                                            <!-- Dynamically populated -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Section: Occupation & Education -->
+                            <div class="form-section">
+                                <h3 class="section-title">Education & Employment</h3>
+                                <div class="form-row">
+                                    <div class="form-group col-12">
+                                        <label for="education">Highest Education Level</label>
+                                        <select id="education" name="education" required>
+                                            <!-- Dynamically populated -->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="workclass">Employment Sector</label>
+                                        <select id="workclass" name="workclass" required>
+                                            <!-- Dynamically populated -->
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="occupation">Occupation</label>
+                                        <select id="occupation" name="occupation" required>
+                                            <!-- Dynamically populated -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Section: Household & Hours -->
+                            <div class="form-section">
+                                <h3 class="section-title">Household & Commitments</h3>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="marital_status">Marital Status</label>
+                                        <select id="marital_status" name="marital_status" required>
+                                            <!-- Dynamically populated -->
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="relationship">Household Relationship</label>
+                                        <select id="relationship" name="relationship" required>
+                                            <!-- Dynamically populated -->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-12">
+                                        <label for="hours_per_week">Work Hours per Week: <span id="hours-display">40</span> hrs</label>
+                                        <input type="range" id="hours_per_week" name="hours_per_week" min="1" max="99" value="40" class="slider">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Section: Financial Assets -->
+                            <div class="form-section">
+                                <h3 class="section-title">Financial Indicators</h3>
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="capital_gain">Annual Capital Gains ($)</label>
+                                        <input type="number" id="capital_gain" name="capital_gain" min="0" value="0">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="capital_loss">Annual Capital Losses ($)</label>
+                                        <input type="number" id="capital_loss" name="capital_loss" min="0" value="0">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-submit">
+                                <span>Evaluate Portfolio Access</span>
+                                <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading Screen -->
+            <section id="loading-screen" class="screen">
+                <div class="loading-container">
+                    <div class="spinner">
+                        <div class="spinner-core"></div>
+                    </div>
+                    <h2 class="loading-title">Analyzing Financial Integrity</h2>
+                    <p class="loading-status">Evaluating census metrics through XGBoost Classifier...</p>
+                    <div class="loading-progress-bar">
+                        <div class="loading-progress-fill"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Dashboard Screen -->
+            <section id="results-screen" class="screen">
+                <!-- Back Button -->
+                <div class="back-action">
+                    <button id="btn-re-evaluate" class="btn-back">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span>Re-evaluate Profile</span>
+                    </button>
+                </div>
+
+                <!-- Dashboard Layout -->
+                <div class="dashboard-layout">
+                    
+                    <!-- Dashboard Header Card -->
+                    <div class="dashboard-header-card">
+                        <div class="dh-info">
+                            <span class="dh-pre">ASSESSMENT COMPLETE</span>
+                            <h2 class="dh-title">Your Financial Profile Results</h2>
+                            <p class="dh-subtitle">Model-driven analysis based on demographic and professional indices.</p>
+                        </div>
+                        <div class="dh-metrics">
+                            <div class="dh-metric-box">
+                                <span class="dh-metric-label">Estimated Annual Income</span>
+                                <span id="display-income" class="dh-metric-value">$0</span>
+                            </div>
+                            <div class="dh-metric-box">
+                                <span class="dh-metric-label">Recommended Product Tier</span>
+                                <span id="display-tier-badge" class="tier-badge">Elite</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Tier Banner -->
+                    <div class="tier-desc-banner">
+                        <div class="banner-color-indicator"></div>
+                        <div class="banner-body">
+                            <h3 id="display-tier-name">Horizon Premium Advantage Account</h3>
+                            <p id="display-tier-desc">Your estimated income places you in our Premium Advantage Category. You qualify for discounted credit rates, increased loan limits, and dedicated investment strategies.</p>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="products-grid-section">
+                        <div class="section-heading">
+                            <h2>Personalized Financial Products</h2>
+                            <p>Pre-qualified products matching your estimated annual income tier.</p>
+                        </div>
+                        <div id="products-container" class="products-grid">
+                            <!-- Dynamic Cards -->
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+
+
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
