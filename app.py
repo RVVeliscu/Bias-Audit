@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import numpy as np
 import joblib
+import pickle as pkl
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 
@@ -11,12 +12,14 @@ CORS(app)
 # Load model and categories
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "model.joblib")
+FOREST_PATH = os.path.join(BASE_DIR, "best_random_forest_model.pkl")
 CATEGORIES_PATH = os.path.join(BASE_DIR, "categories.joblib")
 
 if not os.path.exists(MODEL_PATH) or not os.path.exists(CATEGORIES_PATH):
     raise FileNotFoundError("Model or categories mapping file is missing. Please run train_model.py first.")
 
 model = joblib.load(MODEL_PATH)
+forest_model = pkl.load(open(FOREST_PATH, "rb"))
 categories = joblib.load(CATEGORIES_PATH)
 
 @app.route('/')
@@ -56,6 +59,10 @@ def predict():
         # Predict binary target (>50K or <=50K)
         pred_class = int(model.predict(input_df)[0])
         pred_prob = float(model.predict_proba(input_df)[0][1]) # probability of earning >50k
+        forest_pred_prob = float(forest_model.predict_proba(input_df)[0][1]) # probability of earning >50k from random forest
+
+        if forest_pred_prob > pred_prob:
+            pred_prob = forest_pred_prob
 
         # Heuristic for continuous annual income estimation
         # We base it on:

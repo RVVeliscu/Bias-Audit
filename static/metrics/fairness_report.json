@@ -1,0 +1,157 @@
+{
+  "test_set_size": 9039,
+  "overall_metrics": {
+    "xgboost": {
+      "accuracy": 0.8760924881070915,
+      "precision": 0.7973474801061008,
+      "recall": 0.6706827309236948,
+      "f1_score": 0.7285506543868153,
+      "roc_auc": 0.9383184728059373
+    },
+    "random_forest": {
+      "accuracy": 0.8613784710698086,
+      "precision": 0.7855491329479769,
+      "recall": 0.606425702811245,
+      "f1_score": 0.6844623520523797,
+      "roc_auc": 0.9210852431989407
+    }
+  },
+  "fairness_by_group": {
+    "xgboost": {
+      "sex": {
+        "by_group": {
+          "Female": {
+            "accuracy": 0.9352640545144804,
+            "selection_rate": 0.0868824531516184,
+            "true_positive_rate": 0.5958702064896755,
+            "false_positive_rate": 0.020416024653312787
+          },
+          "Male": {
+            "accuracy": 0.8476408912188729,
+            "selection_rate": 0.2670380078636959,
+            "true_positive_rate": 0.6840168243953733,
+            "false_positive_rate": 0.07829604950023798
+          }
+        },
+        "overall": {
+          "accuracy": 0.8760924881070915,
+          "selection_rate": 0.2085407677840469,
+          "true_positive_rate": 0.6706827309236948,
+          "false_positive_rate": 0.056192997940570755
+        },
+        "demographic_parity_difference": 0.1801555547120775,
+        "equalized_odds_difference": 0.08814661790569778
+      },
+      "race": {
+        "by_group": {
+          "Amer-Indian-Eskimo": {
+            "accuracy": 0.956989247311828,
+            "selection_rate": 0.053763440860215055,
+            "true_positive_rate": 0.5555555555555556,
+            "false_positive_rate": 0.0
+          },
+          "Asian-Pac-Islander": {
+            "accuracy": 0.8571428571428571,
+            "selection_rate": 0.2932330827067669,
+            "true_positive_rate": 0.7439024390243902,
+            "false_positive_rate": 0.09239130434782608
+          },
+          "Black": {
+            "accuracy": 0.9228187919463087,
+            "selection_rate": 0.09284116331096197,
+            "true_positive_rate": 0.5603448275862069,
+            "false_positive_rate": 0.02313624678663239
+          },
+          "Other": {
+            "accuracy": 0.9142857142857143,
+            "selection_rate": 0.0,
+            "true_positive_rate": 0.0,
+            "false_positive_rate": 0.0
+          },
+          "White": {
+            "accuracy": 0.8700103680663557,
+            "selection_rate": 0.22278382581648523,
+            "true_positive_rate": 0.6765285996055227,
+            "false_positive_rate": 0.0610056258790436
+          }
+        },
+        "overall": {
+          "accuracy": 0.8760924881070915,
+          "selection_rate": 0.2085407677840469,
+          "true_positive_rate": 0.6706827309236948,
+          "false_positive_rate": 0.056192997940570755
+        },
+        "demographic_parity_difference": 0.2932330827067669,
+        "equalized_odds_difference": 0.7439024390243902
+      }
+    },
+    "random_forest": {
+      "sex": {
+        "by_group": {
+          "Female": {
+            "accuracy": 0.9226575809199319,
+            "selection_rate": 0.06950596252129472,
+            "true_positive_rate": 0.46607669616519176,
+            "false_positive_rate": 0.017719568567026195
+          },
+          "Male": {
+            "accuracy": 0.831913499344692,
+            "selection_rate": 0.25,
+            "true_positive_rate": 0.631440588853838,
+            "false_positive_rate": 0.07734412184673965
+          }
+        },
+        "overall": {
+          "accuracy": 0.8613784710698086,
+          "selection_rate": 0.19139285319172475,
+          "true_positive_rate": 0.606425702811245,
+          "false_positive_rate": 0.054574874963224475
+        },
+        "demographic_parity_difference": 0.1804940374787053,
+        "equalized_odds_difference": 0.16536389268864626
+      },
+      "race": {
+        "by_group": {
+          "Amer-Indian-Eskimo": {
+            "accuracy": 0.9247311827956989,
+            "selection_rate": 0.06451612903225806,
+            "true_positive_rate": 0.4444444444444444,
+            "false_positive_rate": 0.023809523809523808
+          },
+          "Asian-Pac-Islander": {
+            "accuracy": 0.8458646616541353,
+            "selection_rate": 0.30451127819548873,
+            "true_positive_rate": 0.7439024390243902,
+            "false_positive_rate": 0.10869565217391304
+          },
+          "Black": {
+            "accuracy": 0.9060402684563759,
+            "selection_rate": 0.0894854586129754,
+            "true_positive_rate": 0.4827586206896552,
+            "false_positive_rate": 0.030848329048843187
+          },
+          "Other": {
+            "accuracy": 0.9428571428571428,
+            "selection_rate": 0.02857142857142857,
+            "true_positive_rate": 0.3333333333333333,
+            "false_positive_rate": 0.0
+          },
+          "White": {
+            "accuracy": 0.8552358735095905,
+            "selection_rate": 0.2023068947641265,
+            "true_positive_rate": 0.6094674556213018,
+            "false_positive_rate": 0.05713783403656821
+          }
+        },
+        "overall": {
+          "accuracy": 0.8613784710698086,
+          "selection_rate": 0.19139285319172475,
+          "true_positive_rate": 0.606425702811245,
+          "false_positive_rate": 0.054574874963224475
+        },
+        "demographic_parity_difference": 0.27593984962406015,
+        "equalized_odds_difference": 0.4105691056910569
+      }
+    }
+  }
+}

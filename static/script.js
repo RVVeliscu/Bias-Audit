@@ -280,3 +280,294 @@ function renderResults(result) {
         productsContainer.appendChild(card);
     });
 }
+
+async function loadMetrics() {
+    try {
+
+        // your saved json
+        const response =
+            await fetch("./metrics/metrics.json");
+
+        if (!response.ok)
+            throw new Error("metrics.json not found");
+
+        const data = await response.json();
+
+        renderDashboard(data);
+
+        switchScreen(resultsScreen);
+
+    } catch(err) {
+        console.error(err);
+    }
+}
+
+function renderDashboard(data){
+
+    document.getElementById("test-size").textContent =
+        data.test_set_size.toLocaleString();
+
+    renderOverallMetrics(
+        data.overall_metrics
+    );
+
+    renderFairnessMetrics(
+        data.fairness_by_group
+    );
+}
+
+
+/* ---------- OVERALL ---------- */
+
+function renderOverallMetrics(metrics){
+
+    const container =
+        document.getElementById("overall-metrics");
+
+    container.innerHTML="";
+
+    Object.entries(metrics)
+        .forEach(([model, values])=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className="metric-card";
+
+        card.innerHTML=`
+
+            <h3>${pretty(model)}</h3>
+
+            ${metricLine(
+                "Accuracy",
+                values.accuracy
+            )}
+
+            ${metricLine(
+                "Precision",
+                values.precision
+            )}
+
+            ${metricLine(
+                "Recall",
+                values.recall
+            )}
+
+            ${metricLine(
+                "F1",
+                values.f1_score
+            )}
+
+            ${metricLine(
+                "ROC AUC",
+                values.roc_auc,
+                false
+            )}
+
+        `;
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+
+/* ---------- FAIRNESS ---------- */
+
+function renderFairnessMetrics(models){
+
+    const container =
+        document.getElementById(
+            "fairness-container"
+        );
+
+    container.innerHTML="";
+
+    Object.entries(models)
+        .forEach(([model, fairness])=>{
+
+        const wrapper =
+            document.createElement("div");
+
+        wrapper.className =
+            "fairness-card";
+
+        wrapper.innerHTML=`
+            <h2>
+                ${pretty(model)}
+            </h2>
+        `;
+
+
+        ["sex","race"]
+        .forEach(group=>{
+
+            const section =
+                document.createElement("div");
+
+            section.className =
+                "group-section";
+
+            const meta =
+                fairness[group];
+
+            section.innerHTML=`
+
+                <div class="group-header">
+
+                    <h3>
+                        ${pretty(group)}
+                    </h3>
+
+                    <div class="fairness-summary">
+
+                        <span>
+                            DPD:
+                            ${meta
+                            .demographic_parity_difference
+                            .toFixed(3)}
+                        </span>
+
+                        <span>
+                            EOD:
+                            ${meta
+                            .equalized_odds_difference
+                            .toFixed(3)}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+
+                        <th>Group</th>
+                        <th>Accuracy</th>
+                        <th>Selection</th>
+                        <th>TPR</th>
+                        <th>FPR</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    ${
+                        Object.entries(
+                            meta.by_group
+                        )
+                        .map(
+                        ([name,row])=>`
+
+                        <tr>
+
+                            <td>${name}</td>
+
+                            <td>
+                                ${percent(
+                                    row.accuracy
+                                )}
+                            </td>
+
+                            <td>
+                                ${percent(
+                                    row.selection_rate
+                                )}
+                            </td>
+
+                            <td>
+                                ${percent(
+                                    row.true_positive_rate
+                                )}
+                            </td>
+
+                            <td>
+                                ${percent(
+                                    row.false_positive_rate
+                                )}
+                            </td>
+
+                        </tr>
+
+                        `
+                        )
+                        .join("")
+                    }
+
+                    </tbody>
+
+                </table>
+
+            `;
+
+            wrapper.appendChild(
+                section
+            );
+
+        });
+
+        container.appendChild(
+            wrapper
+        );
+
+    });
+
+}
+
+
+
+/* ---------- HELPERS ---------- */
+
+function percent(v){
+
+    return (
+        v*100
+    ).toFixed(1)+"%";
+
+}
+
+function metricLine(
+    label,
+    value,
+    pct=true
+){
+
+return `
+<div class="metric-row">
+
+<span>${label}</span>
+
+<strong>
+${
+pct
+? percent(value)
+: value.toFixed(3)
+}
+</strong>
+
+</div>
+`;
+
+}
+
+function pretty(v){
+
+return v
+.replaceAll("_"," ")
+.replace(/\b\w/g,
+m=>m.toUpperCase());
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadMetrics
+);

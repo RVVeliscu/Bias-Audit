@@ -202,14 +202,77 @@
             </section>
 
             <!-- Results Dashboard Screen -->
-            <section id="results-screen" class="screen">
+            <!-- <section id="results-screen" class="screen"> -->
                 <!-- Back Button -->
-                <div class="back-action">
-                    <button id="btn-re-evaluate" class="btn-back">
+                <!-- <div class="back-action"> -->
+                    <!-- <button id="btn-re-evaluate" class="btn-back">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         <span>Re-evaluate Profile</span>
                     </button>
+                </div> -->
+
+                <section id="results-screen" class="screen">
+
+    <div class="dashboard-layout">
+
+        <div class="dashboard-header-card">
+            <div>
+                <span class="dh-pre">MODEL EVALUATION</span>
+                <h2 class="dh-title">AI Performance & Fairness Dashboard</h2>
+                <p class="dh-subtitle">
+                    Comparative evaluation of XGBoost and Random Forest.
+                </p>
+            </div>
+
+            <div class="dh-metrics">
+                <div class="dh-metric-box">
+                    <span class="dh-metric-label">Test Samples</span>
+                    <span id="test-size" class="dh-metric-value">0</span>
                 </div>
+            </div>
+        </div>
+
+        <!-- Overall metrics -->
+        <section class="metrics-section">
+            <h2>Overall Performance</h2>
+
+            <div id="overall-metrics" class="metric-grid"></div>
+        </section>
+
+        <!-- Charts -->
+        <section class="metrics-section">
+            <h2>Visual Comparison</h2>
+
+            <div class="chart-grid">
+
+                <div class="chart-card">
+                    <h3>Overall Metrics</h3>
+                    <img src="./metrics/overall_comparison.png">
+                </div>
+
+                <div class="chart-card">
+                    <h3>Fairness by Sex</h3>
+                    <img src="./metrics/sex_breakdown.png">
+                </div>
+
+                <div class="chart-card">
+                    <h3>Fairness by Race</h3>
+                    <img src="./metrics/race_breakdown.png">
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Fairness -->
+        <section class="metrics-section">
+            <h2>Fairness Metrics</h2>
+
+            <div id="fairness-container"></div>
+        </section>
+
+    </div>
+
+</section>
 
                 <!-- Dashboard Layout -->
                 <div class="dashboard-layout">
