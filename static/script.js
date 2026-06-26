@@ -64,9 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
     evaluationForm.addEventListener('submit', handleFormSubmit);
 
     // 4. Back button handler
-    btnReEvaluate.addEventListener('click', () => {
-        switchScreen(formScreen);
-    });
+    if (btnReEvaluate) {
+        btnReEvaluate.addEventListener('click', () => {
+            switchScreen(formScreen);
+        });
+    }
+
+    // 5. Load the model evaluation / fairness dashboard (static panel on the landing page)
+    loadMetrics();
 });
 
 // Fetch categories from Flask endpoint
@@ -282,23 +287,24 @@ function renderResults(result) {
 }
 
 async function loadMetrics() {
-    try {
+    const overallContainer = document.getElementById("overall-metrics");
+    const fairnessContainer = document.getElementById("fairness-container");
 
-        // your saved json
-        const response =
-            await fetch("./metrics/metrics.json");
+    try {
+        const response = await fetch("/metrics/fairness_report.json");
 
         if (!response.ok)
-            throw new Error("metrics.json not found");
+            throw new Error("fairness_report.json not found (status " + response.status + ")");
 
         const data = await response.json();
 
         renderDashboard(data);
 
-        switchScreen(resultsScreen);
-
-    } catch(err) {
-        console.error(err);
+    } catch (err) {
+        console.error("Error loading model evaluation report:", err);
+        const message = '<p class="metrics-error">Could not load the fairness report. Make sure the Flask backend is running and serving the ./metrics/ folder.</p>';
+        if (overallContainer) overallContainer.innerHTML = message;
+        if (fairnessContainer) fairnessContainer.innerHTML = message;
     }
 }
 
@@ -565,9 +571,3 @@ return v
 m=>m.toUpperCase());
 
 }
-
-
-document.addEventListener(
-    "DOMContentLoaded",
-    loadMetrics
-);

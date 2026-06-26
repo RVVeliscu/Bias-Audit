@@ -13,24 +13,25 @@
 <body>
     <!-- App Container -->
     <div class="app-container">
-        
+
         <!-- Header -->
         <header class="main-header">
             <div class="header-logo">
                 <span class="logo-text">APEX <span class="text-light">HORIZON BANK</span></span>
             </div>
             <nav class="header-nav">
-                <a href="#" class="nav-item active">Assessments</a>
+                <a href="#form-screen" class="nav-item active">Assessments</a>
+                <a href="#model-evaluation" class="nav-item">Model Insights</a>
             </nav>
         </header>
 
         <!-- Main Workspace -->
         <main class="main-content">
-            
+
             <!-- Assessment Form Screen -->
             <section id="form-screen" class="screen active">
                 <div class="screen-grid">
-                    
+
                     <!-- Left: Promo & Description -->
                     <div class="promo-panel">
                         <div class="promo-header">
@@ -40,7 +41,7 @@
                                 Welcome to the Apex Horizon Portfolio Evaluator. By analyzing your professional and financial demographics using our trained machine learning models, we instantly estimate your annual earnings category and unlock access to customized loan, credit, and investment instruments.
                             </p>
                         </div>
-                        
+
                         <div class="promo-features">
                             <div class="promo-feature-item">
                                 <div class="feature-text">
@@ -185,6 +186,82 @@
                         </form>
                     </div>
                 </div>
+
+                <!-- ============================================== -->
+                <!-- Model Evaluation & Fairness Dashboard           -->
+                <!-- Always-visible audit panel at the bottom of     -->
+                <!-- the landing page. Data + charts come from the   -->
+                <!-- ./metrics/ folder served by the Flask backend.  -->
+                <!-- ============================================== -->
+                <section id="model-evaluation" class="model-eval-section">
+
+                    <div class="dashboard-layout">
+
+                        <div class="dashboard-header-card">
+                            <div>
+                                <span class="dh-pre">MODEL EVALUATION</span>
+                                <h2 class="dh-title">AI Performance & Fairness Audit</h2>
+                                <p class="dh-subtitle">
+                                    Comparative evaluation of the XGBoost and Random Forest classifiers used to power this assessment, including a breakdown of fairness across sex and race groups.
+                                </p>
+                            </div>
+
+                            <div class="dh-metrics">
+                                <div class="dh-metric-box">
+                                    <span class="dh-metric-label">Test Samples</span>
+                                    <span id="test-size" class="dh-metric-value">&mdash;</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Overall metrics -->
+                        <section class="metrics-section">
+                            <h2>Overall Performance</h2>
+                            <div id="overall-metrics" class="metric-grid">
+                                <p class="metrics-loading">Loading metrics&hellip;</p>
+                            </div>
+                        </section>
+
+                        <!-- Charts -->
+                        <section class="metrics-section">
+                            <h2>Visual Comparison</h2>
+
+                            <div class="chart-grid">
+
+                                <div class="chart-card">
+                                    <h3>Overall Metrics</h3>
+                                    <img src="/metrics/overall_comparison.png" alt="Overall performance comparison between XGBoost and Random Forest" loading="lazy">
+                                </div>
+
+                                <div class="chart-card">
+                                    <h3>Fairness Gaps</h3>
+                                    <img src="/metrics/fairness_gaps.png" alt="Demographic parity and equalized odds gaps by model" loading="lazy">
+                                </div>
+
+                                <div class="chart-card">
+                                    <h3>Breakdown by Sex</h3>
+                                    <img src="/metrics/sex_breakdown.png" alt="Model comparison broken down by sex" loading="lazy">
+                                </div>
+
+                                <div class="chart-card">
+                                    <h3>Breakdown by Race</h3>
+                                    <img src="/metrics/race_breakdown.png" alt="Model comparison broken down by race" loading="lazy">
+                                </div>
+
+                            </div>
+                        </section>
+
+                        <!-- Fairness -->
+                        <section class="metrics-section">
+                            <h2>Fairness Metrics by Group</h2>
+                            <div id="fairness-container">
+                                <p class="metrics-loading">Loading fairness report&hellip;</p>
+                            </div>
+                        </section>
+
+                    </div>
+                </section>
+
             </section>
 
             <!-- Loading Screen -->
@@ -201,82 +278,20 @@
                 </div>
             </section>
 
-            <!-- Results Dashboard Screen -->
-            <!-- <section id="results-screen" class="screen"> -->
+            <!-- Results Dashboard Screen (single prediction outcome) -->
+            <section id="results-screen" class="screen">
+
                 <!-- Back Button -->
-                <!-- <div class="back-action"> -->
-                    <!-- <button id="btn-re-evaluate" class="btn-back">
+                <div class="back-action">
+                    <button id="btn-re-evaluate" class="btn-back" type="button">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         <span>Re-evaluate Profile</span>
                     </button>
-                </div> -->
-
-                <section id="results-screen" class="screen">
-
-    <div class="dashboard-layout">
-
-        <div class="dashboard-header-card">
-            <div>
-                <span class="dh-pre">MODEL EVALUATION</span>
-                <h2 class="dh-title">AI Performance & Fairness Dashboard</h2>
-                <p class="dh-subtitle">
-                    Comparative evaluation of XGBoost and Random Forest.
-                </p>
-            </div>
-
-            <div class="dh-metrics">
-                <div class="dh-metric-box">
-                    <span class="dh-metric-label">Test Samples</span>
-                    <span id="test-size" class="dh-metric-value">0</span>
                 </div>
-            </div>
-        </div>
-
-        <!-- Overall metrics -->
-        <section class="metrics-section">
-            <h2>Overall Performance</h2>
-
-            <div id="overall-metrics" class="metric-grid"></div>
-        </section>
-
-        <!-- Charts -->
-        <section class="metrics-section">
-            <h2>Visual Comparison</h2>
-
-            <div class="chart-grid">
-
-                <div class="chart-card">
-                    <h3>Overall Metrics</h3>
-                    <img src="./metrics/overall_comparison.png">
-                </div>
-
-                <div class="chart-card">
-                    <h3>Fairness by Sex</h3>
-                    <img src="./metrics/sex_breakdown.png">
-                </div>
-
-                <div class="chart-card">
-                    <h3>Fairness by Race</h3>
-                    <img src="./metrics/race_breakdown.png">
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Fairness -->
-        <section class="metrics-section">
-            <h2>Fairness Metrics</h2>
-
-            <div id="fairness-container"></div>
-        </section>
-
-    </div>
-
-</section>
 
                 <!-- Dashboard Layout -->
                 <div class="dashboard-layout">
-                    
+
                     <!-- Dashboard Header Card -->
                     <div class="dashboard-header-card">
                         <div class="dh-info">
@@ -321,10 +336,8 @@
 
         </main>
 
-
-
     </div>
-    
+
     <script src="script.js"></script>
 </body>
 </html>
